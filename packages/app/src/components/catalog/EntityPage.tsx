@@ -1,6 +1,13 @@
 import React from 'react';
 import { Button, Grid } from '@material-ui/core';
 import {
+  EntityAzurePipelinesContent,
+  EntityAzurePullRequestsContent,
+  EntityAzureGitTagsContent,
+  EntityAzureReadmeCard,
+  isAzureDevOpsAvailable,
+} from '@backstage/plugin-azure-devops';
+import {
   EntityApiDefinitionCard,
   EntityConsumedApisCard,
   EntityConsumingComponentsCard,
@@ -73,7 +80,9 @@ const cicdContent = (
     <EntitySwitch.Case if={isGithubActionsAvailable}>
       <EntityGithubActionsContent />
     </EntitySwitch.Case>
-
+    <EntitySwitch.Case if={isAzureDevOpsAvailable}>
+      <EntityAzurePipelinesContent defaultLimit={25} />
+    </EntitySwitch.Case>
     <EntitySwitch.Case>
       <EmptyState
         title="No CI/CD available for this entity"
@@ -137,6 +146,9 @@ const overviewContent = (
     <Grid item md={8} xs={12}>
       <EntityHasSubcomponentsCard variant="gridItem" />
     </Grid>
+    <Grid item md={6}>
+      <EntityAzureReadmeCard maxHeight={350} />
+    </Grid>
   </Grid>
 );
 
@@ -171,9 +183,14 @@ const serviceEntityPage = (
         </Grid>
       </Grid>
     </EntityLayout.Route>
-
     <EntityLayout.Route path="/docs" title="Docs">
       {techdocsContent}
+    </EntityLayout.Route>
+    <EntityLayout.Route if={isAzureDevOpsAvailable} path="/pull-requests" title="Pull Requests">
+      <EntityAzurePullRequestsContent defaultLimit={25} />
+    </EntityLayout.Route>
+    <EntityLayout.Route if={isAzureDevOpsAvailable} path="/git-tags" title="Git Tags">
+      <EntityAzureGitTagsContent />
     </EntityLayout.Route>
   </EntityLayout>
 );

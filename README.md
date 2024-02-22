@@ -1,8 +1,22 @@
 # [Backstage](https://backstage.io)
 
-This is your newly scaffolded Backstage App, Good Luck!
+Esse projeto tem o objetivo de desenvolver a ferramenta Backstage explorando as funcionalidades que a plataforma disponibiliza.
 
-To start the app, run:
+As implementações serão de carater evolutivo, com "HowTo" de cada funcionalidade acoplado para replicação e entendimento de como as features são implementadas e funcionam.
+
+### Setup do Ambiente
+
+Esse lab está sendo executado localmente em ambiente Windows com WSL Debian.
+
+Pacotes necessários no Debian:
+- make e build-essentials
+- curl ou wget
+- Node.js versão LTS
+- Gerenciador de pacotes YARN
+- Docker + docker-compose
+- Git
+
+### Start e run da aplicação:
 
 ```sh
 yarn install
